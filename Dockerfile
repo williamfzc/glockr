@@ -4,7 +4,7 @@ FROM python:3-alpine
 RUN apk add --no-cache gcc make g++
 
 # glockr package, splited for cache usage
-RUN pip install glockr==0.1.1
+RUN pip install glockr==0.1.2
 
 EXPOSE 9410
 

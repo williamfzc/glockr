@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='glockr',
-    version='0.1.1',
+    version='0.1.2',
     description='global lockable resources for all',
     author='williamfzc',
     author_email='fengzc@vip.qq.com',
@@ -14,10 +14,5 @@ setup(
         'requests',
         'uvicorn',
         'fire',
-    ],
-    entry_points={
-        "console_scripts": [
-            "glockr = glockr.client.GClient",
-        ],
-    },
+    ]
 )
