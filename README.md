@@ -1,5 +1,8 @@
 # glockr
 
+[![PyPI version](https://badge.fury.io/py/glockr.svg)](https://badge.fury.io/py/glockr)
+[![Maintainability](https://api.codeclimate.com/v1/badges/913f98606870d82e0b24/maintainability)](https://codeclimate.com/github/williamfzc/glockr/maintainability)
+
 global lockable resources for all
 
 ## goal
