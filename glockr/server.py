@@ -56,9 +56,9 @@ def release(name: str = None, label: str = None):
 def start_server():
     uvicorn.run(
         app,
-        host="127.0.0.1",
+        host="0.0.0.0",
         port=9410,
-        log_level="warning"
+        log_level="info"
     )
 
 
