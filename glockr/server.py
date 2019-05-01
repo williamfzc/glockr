@@ -53,7 +53,7 @@ def release(name: str = None, label: str = None):
     }
 
 
-def main():
+def start_server():
     uvicorn.run(
         app,
         host="127.0.0.1",
@@ -63,4 +63,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    start_server()
