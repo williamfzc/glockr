@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='glockr',
-    version='0.1.0',
+    version='0.1.1',
     description='global lockable resources for all',
     author='williamfzc',
     author_email='fengzc@vip.qq.com',
@@ -17,8 +17,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "glockr.startserver = glockr.server:main",
-            "glockr = glockr.client:main",
+            "glockr = glockr.client.GClient",
         ],
     },
 )
