@@ -71,6 +71,10 @@ class GResourceManager(object):
             if each_res.label == label_name:
                 target_list.append(each_res)
 
+        # no data found?
+        if not target_list:
+            return GResourceResponse(False, 'label {} not found'.format(label_name))
+
         # make sure they can be acquired before acquirement
         for each_res in target_list:
             if not each_res.available():
