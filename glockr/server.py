@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 import uvicorn
+import fire
 
 from glockr.manager import GResourceManager
-
 
 # --- API below ---
 
@@ -53,14 +53,23 @@ def release(name: str = None, label: str = None):
     }
 
 
-def start_server():
+def start_server(port: int = None):
+    if not port:
+        port = 9410
+
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=9410,
+        port=port,
         log_level="info"
     )
 
 
+def main():
+    fire.Fire({
+        'start': start_server,
+    })
+
+
 if __name__ == '__main__':
-    start_server()
+    main()

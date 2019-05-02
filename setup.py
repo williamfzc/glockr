@@ -17,7 +17,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "glockrs = glockr.server:start_server",
+            "glockrs = glockr.server:main",
             "glockrc = glockr.client:main",
         ],
     },
