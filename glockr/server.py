@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 import uvicorn
 import fire
+import os
 
 from glockr.manager import GResourceManager
+from glockr import config
 
 # --- API below ---
 
@@ -10,28 +12,30 @@ from glockr.manager import GResourceManager
 
 app = FastAPI()
 
+os.putenv('GLOCKR_PORT', config.PORT)
 
-@app.get("/")
-def hello():
+
+@app.get(config.ROUTER['heartbeat'])
+def heartbeat():
     return {"hello": "from glockr server"}
 
 
-@app.get("/res")
-def res():
+@app.get(config.ROUTER['show_all'])
+def show_all():
     return GResourceManager.show_all()
 
 
-@app.post("/res/add")
+@app.post(config.ROUTER['add'])
 def add(name: str, label: str = None):
     return GResourceManager.add(name, label).to_dict()
 
 
-@app.post("/res/remove")
+@app.post(config.ROUTER['remove'])
 def remove(name: str):
     return GResourceManager.remove(name).to_dict()
 
 
-@app.post("/res/acquire")
+@app.post(config.ROUTER['acquire'])
 def acquire(name: str = None, label: str = None):
     """ acquire resource """
     if name:
@@ -43,7 +47,7 @@ def acquire(name: str = None, label: str = None):
     }
 
 
-@app.post("/res/release")
+@app.post(config.ROUTER['release'])
 def release(name: str = None, label: str = None):
     """ release resource """
     if name:
@@ -58,7 +62,7 @@ def release(name: str = None, label: str = None):
 def start_server(port: int = None):
     # TODO how to sync this change to client ??
     if not port:
-        port = 29410
+        port = config.PORT
 
     uvicorn.run(
         app,

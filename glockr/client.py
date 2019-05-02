@@ -2,32 +2,25 @@ import requests
 import fire
 import requests.exceptions
 
+from glockr import config
+
 
 # TODO API for waiting until release
 
 
+_PORT = '29410'
+_BASE_URL = 'http://127.0.0.1:{}'.format(_PORT)
+
+_URL_DICT = {
+    each_name: _BASE_URL + each_router
+    for each_name, each_router in config.ROUTER.items()
+}
+
+
 class GClient(object):
-    _PORT = '29410'
-    _BASE_URL = 'http://127.0.0.1:{}'.format(_PORT)
-    _URL_DICT = {
-        'heart': _BASE_URL + '/',
-        'add': _BASE_URL + '/res/add',
-        'remove': _BASE_URL + '/res/remove',
-        'show_all': _BASE_URL + '/res',
-
-        'acquire': {
-            'name': _BASE_URL + '/res/acquire?name={}',
-            'label': _BASE_URL + '/res/acquire?label={}',
-        },
-        'release': {
-            'name': _BASE_URL + '/res/release?name={}',
-            'label': _BASE_URL + '/res/release?label={}',
-        }
-    }
-
     @classmethod
     def heartbeat(cls) -> bool:
-        target_url = cls._URL_DICT['heart']
+        target_url = _URL_DICT['heartbeat']
         try:
             resp = requests.get(target_url)
         except requests.exceptions.ConnectionError:
@@ -52,7 +45,7 @@ class GClient(object):
 
     @classmethod
     def add(cls, name: str, label: str = None):
-        target_url = cls._URL_DICT['add'] + '?name={}'.format(name)
+        target_url = _URL_DICT['add'] + '?name={}'.format(name)
         if label:
             target_url += '&label={}'.format(label)
         resp = requests.post(target_url)
@@ -60,25 +53,25 @@ class GClient(object):
 
     @classmethod
     def remove(cls, name: str):
-        target_url = cls._URL_DICT['remove'] + '?name={}'.format(name)
+        target_url = _URL_DICT['remove'] + '?name={}'.format(name)
         resp = requests.post(target_url)
         print(resp.json())
 
     @classmethod
     def show_all(cls):
-        target_url = cls._URL_DICT['show_all']
+        target_url = _URL_DICT['show_all']
         resp = requests.get(target_url)
         print(resp.json())
 
     @classmethod
     def _acquire(cls, acquire_type: str, content: str):
-        target_url = cls._URL_DICT['acquire'][acquire_type].format(content)
+        target_url = _URL_DICT['acquire'] + '?{}={}'.format(acquire_type, content)
         resp = requests.post(target_url)
         return resp.json()
 
     @classmethod
     def _release(cls, release_type: str, content: str):
-        target_url = cls._URL_DICT['release'][release_type].format(content)
+        target_url = _URL_DICT['release'] + '?{}={}'.format(release_type, content)
         resp = requests.post(target_url)
         return resp.json()
 
