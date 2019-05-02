@@ -15,52 +15,61 @@ And, make it works locally.
 
 ## usage
 
-### CLI
+### Backend
 
 Start your backend firstly:
 
 ```bash
 pip install glockr
-python -m glockr.server
+
+# default use port 29410
+glockrs start
 ```
 
 Or, directly use docker:
 
 ```bash
 docker pull williamfzc/glockr
-docker run --rm -p 9410:9410 williamfzc/glockr
+docker run --rm -p 29410:29410 williamfzc/glockr
 ```
 
-You can use CLI now:
+Based on [FastAPI](https://github.com/tiangolo/fastapi), All the API of glockr can be easily viewed and executed via [http://127.0.0.1:29410/docs](http://127.0.0.1:29410/docs). 
+
+![backend](./pic/backend_ui.png)
+
+You can also use it as UI to manage your resource directly.
+
+### CLI
+
+Make sure glockr backend has been started.
 
 ```bash
-python -m glockr.client
+glockrc heartbeat
 ```
 
 And you will see the help:
 
 ```bash
-$ python3 -m glockr.client
-
+➜  glockr git:(master) glockrc
 Type:        GClient
-String form: <__main__.GClient object at 0x10d2f0d30>
-File:        ~/github_workspace/glockr/glockr/client.py
+String form: <glockr.client.GClient object at 0x7f506abcee48>
 
-Usage:       client.py
-             client.py acquire-label
-             client.py acquire-name
-             client.py add
-             client.py release-label
-             client.py release-name
-             client.py remove
-             client.py show-all
+Usage:       glockrc 
+             glockrc acquire-label
+             glockrc acquire-name
+             glockrc add
+             glockrc heartbeat
+             glockrc release-label
+             glockrc release-name
+             glockrc remove
+             glockrc show-all
 ```
 
 New a resource object, named '123', label 'abc':
 
 ```bash
 in:
-python -m glockr.client add 123 abc
+glockrc add 123 abc
 
 out:
 {'result': True, 'reason': ''}
@@ -70,7 +79,7 @@ Acquire it by name!
 
 ```bash
 in:
-python -m glockr.client acquire-name 123
+glockrc acquire-name 123
 
 out:
 {'result': True, 'reason': ''}
@@ -80,7 +89,7 @@ After acquirement, resource has been locked!
 
 ```bash
 in:
-python -m glockr.client acquire-name 123
+glockrc acquire-name 123
 
 out:
 {'result': False, 'reason': 'res 123 status: BUSY'}
@@ -88,13 +97,18 @@ out:
 
 Label can be used to require locks on multiple resources concurrently.
 
-New a resource object, named '456', label 'abc'.
+New a resource object, named '456', label 'abc'. Then, lock label 'abc'. By doing this, '123' and '456' (because they have label 'abc') will be locked.
 
 ```bash
-python -m glockr.client acquire-label abc
-```
+in:
+glockrc release-name 123
+glockrc add 456 abc
+glockrc acquire-label abc
+glockrc show-all
 
-Then, lock label 'abc'. By doing this, '123' and '456' (because they have label 'abc') will be locked.
+out:
+{'123': {'name': '123', 'label': 'abc', 'status': 'BUSY'}, '456': {'name': '456', 'label': 'abc', 'status': 'BUSY'}}
+```
 
 JSON response can be easily handled by other programs.
 
