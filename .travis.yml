@@ -1,0 +1,13 @@
+os: linux
+dist: xenial
+language: python
+sudo: true
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+
+install:
+  - pip install glockr
+
+script: git clone https://github.com/williamfzc/glockr.git && cd test && python test_server.py
