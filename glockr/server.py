@@ -12,7 +12,7 @@ from glockr import config
 
 app = FastAPI()
 
-os.putenv('GLOCKR_PORT', config.PORT)
+os.putenv(config.PORT_ENV_NAME, config.PORT)
 
 
 @app.get(config.ROUTER['heartbeat'])
@@ -62,7 +62,9 @@ def release(name: str = None, label: str = None):
 def start_server(port: int = None):
     # TODO how to sync this change to client ??
     if not port:
-        port = config.PORT
+        port = int(config.PORT)
+    else:
+        os.putenv(config.PORT_ENV_NAME, port)
 
     uvicorn.run(
         app,

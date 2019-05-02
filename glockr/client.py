@@ -1,14 +1,14 @@
 import requests
 import fire
 import requests.exceptions
+import os
 
 from glockr import config
 
 
 # TODO API for waiting until release
 
-
-_PORT = '29410'
+_PORT = os.getenv(config.PORT_ENV_NAME) or config.PORT
 _BASE_URL = 'http://127.0.0.1:{}'.format(_PORT)
 
 _URL_DICT = {
