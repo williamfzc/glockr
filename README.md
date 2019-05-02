@@ -3,6 +3,7 @@
 [![Python 3.6](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![PyPI version](https://badge.fury.io/py/glockr.svg)](https://badge.fury.io/py/glockr)
 [![Maintainability](https://api.codeclimate.com/v1/badges/913f98606870d82e0b24/maintainability)](https://codeclimate.com/github/williamfzc/glockr/maintainability)
+[![Build Status](https://travis-ci.org/williamfzc/glockr.svg?branch=master)](https://travis-ci.org/williamfzc/glockr)
 
 global lockable resources for all
 
@@ -19,6 +20,8 @@ And, make it works locally.
 Python 3.6+
 
 ### Backend
+
+> g lock r s = global lockable resource server
 
 Start your backend firstly:
 
@@ -43,6 +46,8 @@ Based on [FastAPI](https://github.com/tiangolo/fastapi), All the API of glockr c
 You can also use it as UI to manage your resource directly.
 
 ### CLI
+
+> g lock r c = global lockable resource client
 
 Make sure glockr backend has been started.
 
