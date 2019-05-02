@@ -8,6 +8,7 @@ setup(
     author='williamfzc',
     author_email='fengzc@vip.qq.com',
     url='https://github.com/williamfzc/glockr',
+    python_requires=">=3.6",
     packages=find_packages(),
     install_requires=[
         'fastapi',
