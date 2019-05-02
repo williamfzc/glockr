@@ -1,10 +1,8 @@
 FROM python:3-alpine
 
-# dep
-RUN apk add --no-cache gcc make g++
-
-# glockr package, splited for cache usage
-RUN pip install glockr==0.1.2
+RUN apk add --no-cache gcc make g++ \
+    && pip install glockr==0.1.2 \
+    && apk del gcc make g++
 
 EXPOSE 9410
 
