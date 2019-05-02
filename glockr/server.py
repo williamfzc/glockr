@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
 import fire
-import os
 
 from glockr.manager import GResourceManager
 from glockr import config
@@ -11,8 +10,6 @@ from glockr import config
 # TODO API for updating resource?
 
 app = FastAPI()
-
-os.putenv(config.PORT_ENV_NAME, config.PORT)
 
 
 @app.get(config.ROUTER['heartbeat'])
@@ -60,11 +57,8 @@ def release(name: str = None, label: str = None):
 
 
 def start_server(port: int = None):
-    # TODO how to sync this change to client ??
     if not port:
         port = int(config.PORT)
-    else:
-        os.putenv(config.PORT_ENV_NAME, port)
 
     uvicorn.run(
         app,

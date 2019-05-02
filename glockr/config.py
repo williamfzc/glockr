@@ -1,5 +1,4 @@
 PORT = '29410'
-PORT_ENV_NAME = 'GLOCKR_PORT'
 
 ROUTER = {
     'heartbeat': '/',
