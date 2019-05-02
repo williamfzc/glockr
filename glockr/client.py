@@ -1,5 +1,6 @@
 import requests
 import fire
+import json
 import requests.exceptions
 
 from glockr import config
@@ -17,6 +18,8 @@ _URL_DICT = {
 
 
 class GClient(object):
+    # TODO difficult to use it as python module, need redesign.
+
     @classmethod
     def heartbeat(cls) -> bool:
         target_url = _URL_DICT['heartbeat']
@@ -48,31 +51,48 @@ class GClient(object):
         if label:
             target_url += '&label={}'.format(label)
         resp = requests.post(target_url)
-        print(resp.json())
+        print(resp.text)
 
     @classmethod
     def remove(cls, name: str):
         target_url = _URL_DICT['remove'] + '?name={}'.format(name)
         resp = requests.post(target_url)
-        print(resp.json())
+        print(resp.text)
 
     @classmethod
     def show_all(cls):
         target_url = _URL_DICT['show_all']
         resp = requests.get(target_url)
-        print(resp.json())
+        print(resp.text)
+
+    @classmethod
+    def download(cls, result_file_path: str):
+        target_url = _URL_DICT['show_all']
+        resp = requests.get(target_url)
+
+        with open(result_file_path, 'w+', encoding=config.CHARSET) as f:
+            f.write(resp.text)
+
+        print(resp.text)
+
+    @classmethod
+    def upload(cls, result_file_path: str):
+        with open(result_file_path, encoding=config.CHARSET) as f:
+            data_dict = json.loads(f.read())
+        for each_data in data_dict.values():
+            cls.add(each_data['name'], each_data['label'])
 
     @classmethod
     def _acquire(cls, acquire_type: str, content: str):
         target_url = _URL_DICT['acquire'] + '?{}={}'.format(acquire_type, content)
         resp = requests.post(target_url)
-        return resp.json()
+        return resp.text
 
     @classmethod
     def _release(cls, release_type: str, content: str):
         target_url = _URL_DICT['release'] + '?{}={}'.format(release_type, content)
         resp = requests.post(target_url)
-        return resp.json()
+        return resp.text
 
 
 def main():

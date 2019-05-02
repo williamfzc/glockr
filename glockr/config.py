@@ -1,5 +1,7 @@
 PORT = '29410'
 
+CHARSET = 'utf-8'
+
 ROUTER = {
     'heartbeat': '/',
     'add': '/res/add',
