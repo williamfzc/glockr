@@ -68,5 +68,9 @@ class GClient(object):
         return resp.json()
 
 
-if __name__ == '__main__':
+def main():
     fire.Fire(GClient)
+
+
+if __name__ == '__main__':
+    main()

@@ -14,5 +14,11 @@ setup(
         'requests',
         'uvicorn',
         'fire',
-    ]
+    ],
+    entry_points={
+        "console_scripts": [
+            "glockrs = glockr.server:start_server",
+            "glockrc = glockr.client:main",
+        ],
+    },
 )
