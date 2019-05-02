@@ -10,4 +10,4 @@ python:
 install:
   - pip install glockr
 
-script: git clone https://github.com/williamfzc/glockr.git && cd test && python test_server.py
+script: cd test && python test_server.py
