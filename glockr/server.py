@@ -6,6 +6,8 @@ from glockr.manager import GResourceManager
 
 # --- API below ---
 
+# TODO API for updating resource?
+
 app = FastAPI()
 
 

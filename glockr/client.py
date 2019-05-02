@@ -1,10 +1,16 @@
 import requests
 import fire
+import requests.exceptions
+
+
+# TODO API for waiting until release
 
 
 class GClient(object):
-    _BASE_URL = 'http://127.0.0.1:29410'
+    _PORT = '29410'
+    _BASE_URL = 'http://127.0.0.1:{}'.format(_PORT)
     _URL_DICT = {
+        'heart': _BASE_URL + '/',
         'add': _BASE_URL + '/res/add',
         'remove': _BASE_URL + '/res/remove',
         'show_all': _BASE_URL + '/res',
@@ -20,23 +26,32 @@ class GClient(object):
     }
 
     @classmethod
-    def acquire_name(cls, name):
+    def heartbeat(cls) -> bool:
+        target_url = cls._URL_DICT['heart']
+        try:
+            resp = requests.get(target_url)
+        except requests.exceptions.ConnectionError:
+            return False
+        return resp.ok
+
+    @classmethod
+    def acquire_name(cls, name: str):
         print(cls._acquire('name', name))
 
     @classmethod
-    def acquire_label(cls, label):
+    def acquire_label(cls, label: str):
         print(cls._acquire('label', label))
 
     @classmethod
-    def release_name(cls, name):
+    def release_name(cls, name: str):
         print(cls._release('name', name))
 
     @classmethod
-    def release_label(cls, label):
+    def release_label(cls, label: str):
         print(cls._release('label', label))
 
     @classmethod
-    def add(cls, name, label=None):
+    def add(cls, name: str, label: str = None):
         target_url = cls._URL_DICT['add'] + '?name={}'.format(name)
         if label:
             target_url += '&label={}'.format(label)
@@ -44,7 +59,7 @@ class GClient(object):
         print(resp.json())
 
     @classmethod
-    def remove(cls, name):
+    def remove(cls, name: str):
         target_url = cls._URL_DICT['remove'] + '?name={}'.format(name)
         resp = requests.post(target_url)
         print(resp.json())
