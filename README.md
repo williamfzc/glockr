@@ -1,5 +1,6 @@
 # glockr
 
+[![Python 3.6](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![PyPI version](https://badge.fury.io/py/glockr.svg)](https://badge.fury.io/py/glockr)
 [![Maintainability](https://api.codeclimate.com/v1/badges/913f98606870d82e0b24/maintainability)](https://codeclimate.com/github/williamfzc/glockr/maintainability)
 
@@ -14,6 +15,8 @@ Highly inspired by [Jenkins's lockable resources plugin](https://wiki.jenkins.io
 And, make it works locally.
 
 ## usage
+
+Python 3.6+
 
 ### Backend
 
