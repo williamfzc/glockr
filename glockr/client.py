@@ -3,7 +3,7 @@ import fire
 
 
 class GClient(object):
-    _BASE_URL = 'http://127.0.0.1:9410'
+    _BASE_URL = 'http://127.0.0.1:29410'
     _URL_DICT = {
         'add': _BASE_URL + '/res/add',
         'remove': _BASE_URL + '/res/remove',

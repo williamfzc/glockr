@@ -54,8 +54,9 @@ def release(name: str = None, label: str = None):
 
 
 def start_server(port: int = None):
+    # TODO how to sync this change to client ??
     if not port:
-        port = 9410
+        port = 29410
 
     uvicorn.run(
         app,
