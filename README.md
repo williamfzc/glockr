@@ -19,7 +19,7 @@ And, make it works locally.
 
 Python 3.6+
 
-### Backend
+### backend
 
 > g lock r s = global lockable resource server
 
@@ -73,15 +73,21 @@ Usage:       glockrc
              glockrc show-all
 ```
 
-New a resource object, named '123', label 'abc':
+JSON response can be easily handled by other programs.
+
+#### add a new resource
+
+New a resource object, named "123", label "abc":
 
 ```bash
 in:
 glockrc add 123 abc
 
 out:
-{'result': True, 'reason': ''}
+{"result": True, "reason": ""}
 ```
+
+#### acquire a resource
 
 Acquire it by name!
 
@@ -90,7 +96,7 @@ in:
 glockrc acquire-name 123
 
 out:
-{'result': True, 'reason': ''}
+{"result": True, "reason": ""}
 ```
 
 After acquirement, resource has been locked!
@@ -100,12 +106,14 @@ in:
 glockrc acquire-name 123
 
 out:
-{'result': False, 'reason': 'res 123 status: BUSY'}
+{"result": False, "reason": "res 123 status: BUSY"}
 ```
+
+#### acquire multiple resources with `label`
 
 Label can be used to require locks on multiple resources concurrently.
 
-New a resource object, named '456', label 'abc'. Then, lock label 'abc'. By doing this, '123' and '456' (because they have label 'abc') will be locked.
+New a resource object, named "456", label "abc". Then, lock label "abc". By doing this, "123" and "456" (because they have label "abc") will be locked.
 
 ```bash
 in:
@@ -115,10 +123,35 @@ glockrc acquire-label abc
 glockrc show-all
 
 out:
-{'123': {'name': '123', 'label': 'abc', 'status': 'BUSY'}, '456': {'name': '456', 'label': 'abc', 'status': 'BUSY'}}
+{"123": {"name": "123", "label": "abc", "status": "BUSY"}, "456": {"name": "456", "label": "abc", "status": "BUSY"}}
 ```
 
-JSON response can be easily handled by other programs.
+#### backup and restore your data
+
+Note: **glockr server only save your data in python runtime! And once server were stopped, your data will gone and you have to add them again.**
+
+But, you can use `download` and `upload` to sync your data easily.
+
+```bash
+in:
+glockrc download ./data1.json
+
+out:
+{"123": {"name": "123", "label": "abc", "status": "BUSY"}, "456": {"name": "456", "label": "abc", "status": "BUSY"}}
+```
+
+Your data will be saved in `./data1.json`. And, you can use them to init your server:
+
+```bash
+in:
+glockrc upload ./data1.json
+
+out:
+{"result":true,"reason":""}
+{"result":true,"reason":""}
+```
+
+One by one, your data has been uploaded!
 
 ### program (WIP)
 
