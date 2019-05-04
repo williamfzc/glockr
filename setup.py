@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='glockr',
-    version='0.1.3',
+    version='0.1.4',
     description='Make everything lockable.',
     author='williamfzc',
     author_email='fengzc@vip.qq.com',
