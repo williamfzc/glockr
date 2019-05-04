@@ -9,4 +9,4 @@ python:
 install:
   - pip install glockr
 
-script: cd test && python test_server.py
+script: cd test && python test_server.py && python test_client.py

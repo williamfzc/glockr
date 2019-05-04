@@ -4,7 +4,9 @@ import requests
 import time
 import json
 
-BASE_URL = 'http://127.0.0.1:29410'
+from glockr.config import PORT
+
+BASE_URL = 'http://127.0.0.1:{}'.format(PORT)
 
 
 class TestServer(unittest.TestCase):
@@ -24,7 +26,7 @@ class TestServer(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         super(TestServer, cls).setUpClass()
-        cls._server_process = subprocess.Popen('glockrs start', shell=True)
+        cls._server_process = subprocess.Popen('python3 -m glockr.server start', shell=True)
         time.sleep(3)
 
     def test_1_add(self):
