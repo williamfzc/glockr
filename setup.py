@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
     name='glockr',
     version='0.1.3',
-    description='global lockable resources for all',
+    description='Make everything lockable.',
     author='williamfzc',
     author_email='fengzc@vip.qq.com',
     url='https://github.com/williamfzc/glockr',

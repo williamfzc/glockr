@@ -1,6 +1,6 @@
-<h1 align="center">G(lobal) Lock R(esource)</h1>
+<h1 align="center">G(lobal) Lock(able) R(esource)</h1>
 <p align="center">
-    <em>global lockable resources for all</em>
+    <em>Make everything lockable.</em>
 </p>
 
 ---
@@ -14,7 +14,7 @@
 
 # goal
 
-Resources lock for everything.
+Make everything(resource) lockable.
 
 Highly inspired by [Jenkins's lockable resources plugin](https://wiki.jenkins.io/display/JENKINS/Lockable+Resources+Plugin).
 
