@@ -1,13 +1,18 @@
-# glockr
+<h1 align="center">G(lobal) Lock R(esource)</h1>
+<p align="center">
+    <em>global lockable resources for all</em>
+</p>
+
+---
 
 [![Python 3.6](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![PyPI version](https://badge.fury.io/py/glockr.svg)](https://badge.fury.io/py/glockr)
 [![Maintainability](https://api.codeclimate.com/v1/badges/913f98606870d82e0b24/maintainability)](https://codeclimate.com/github/williamfzc/glockr/maintainability)
 [![Build Status](https://travis-ci.org/williamfzc/glockr.svg?branch=master)](https://travis-ci.org/williamfzc/glockr)
 
-global lockable resources for all
+---
 
-## goal
+# goal
 
 Resources lock for everything.
 
@@ -15,11 +20,11 @@ Highly inspired by [Jenkins's lockable resources plugin](https://wiki.jenkins.io
 
 And, make it works locally.
 
-## usage
+# usage
 
 Python 3.6+
 
-### backend
+## backend
 
 > g lock r s = global lockable resource server
 
@@ -51,7 +56,7 @@ Based on [FastAPI](https://github.com/tiangolo/fastapi), All the API of glockr c
 
 You can also use it as UI to manage your resource directly.
 
-### CLI
+## CLI
 
 > g lock r c = global lockable resource client
 
@@ -83,7 +88,7 @@ Usage:       glockrc
 
 JSON response can be easily handled by other programs.
 
-#### add a new resource
+### add a new resource
 
 New a resource object, named "123", label "abc":
 
@@ -95,7 +100,7 @@ out:
 {"result": True, "reason": ""}
 ```
 
-#### acquire a resource
+### acquire a resource
 
 Acquire it by name!
 
@@ -117,7 +122,7 @@ out:
 {"result": False, "reason": "res 123 status: BUSY"}
 ```
 
-#### acquire multiple resources with `label`
+### acquire multiple resources with `label`
 
 Label can be used to require locks on multiple resources concurrently.
 
@@ -134,7 +139,7 @@ out:
 {"123": {"name": "123", "label": "abc", "status": "BUSY"}, "456": {"name": "456", "label": "abc", "status": "BUSY"}}
 ```
 
-#### backup and restore your data
+### backup and restore your data
 
 Note: **glockr server only save your data in python runtime! And once server were stopped, your data will gone and you have to add them again.**
 
@@ -161,6 +166,10 @@ out:
 
 One by one, your data has been uploaded!
 
-### program (WIP)
+## program (WIP)
 
 Based on C/S, glockr supports different language clients.
+
+# contribution
+
+Welcome! And please let me know via issue or PR :)
