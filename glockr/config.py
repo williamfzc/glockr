@@ -1,4 +1,11 @@
-PORT = '29410'
+import os
+
+
+PORT_ENV_NAME = 'GLOCKR_PORT'
+if PORT_ENV_NAME in os.environ:
+    PORT = os.environ[PORT_ENV_NAME]
+else:
+    PORT = '29410'
 
 CHARSET = 'utf-8'
 

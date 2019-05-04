@@ -30,6 +30,12 @@ pip install glockr
 
 # default use port 29410
 glockrs start
+
+# or use another port?
+# would be better to set it in file (such as ~/.bashrc)
+export GLOCKR_PORT=29411 && glockrs start
+
+# and your server will be running on 29411
 ```
 
 Or, directly use docker:
@@ -62,15 +68,17 @@ And you will see the help:
 Type:        GClient
 String form: <glockr.client.GClient object at 0x7f506abcee48>
 
-Usage:       glockrc 
+Usage:       glockrc
              glockrc acquire-label
              glockrc acquire-name
              glockrc add
+             glockrc download
              glockrc heartbeat
              glockrc release-label
              glockrc release-name
              glockrc remove
              glockrc show-all
+             glockrc upload
 ```
 
 JSON response can be easily handled by other programs.
