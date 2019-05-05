@@ -12,8 +12,7 @@ install:
 
 script:
   - cd test
-  - coverage run test_server.py
-  - coverage run test_client.py
+  - coverage run entry.py
 
 after_success:
   - codecov --token=$CODECOV_TOKEN
