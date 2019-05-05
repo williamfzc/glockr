@@ -1,12 +1,18 @@
 os: linux
 dist: xenial
 language: python
-sudo: true
+sudo: false
 python:
   - "3.6"
   - "3.7"
 
 install:
-  - pip install glockr
+  - pip install codecov
+  - pip install .
 
-script: cd test && python test_server.py && python test_client.py
+script:
+  - cd test && coverage run test_server.py
+  - cd test && coverage run test_client.py
+
+after_success:
+  - codecov
